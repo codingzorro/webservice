@@ -1,10 +1,10 @@
 # myweb
 
-A Clojure library designed to ... well, that part is up to you.
+Code inspired by "Learning Clojure" by Adam Bard
 
 ## Usage
 
-FIXME
+lein run -m myweb.core
 
 ## License
 
