@@ -1,7 +1,9 @@
 (ns myweb.core
-  (:require [ring.adapter.jetty :as jetty]))
+  (:require [ring.adapter.jetty :as jetty]
+            [myweb.functions :as f]))
 
 (import '[org.eclipse.jetty.util UrlEncoded MultiMap])
+
 
 
 (defn parse-query-string
@@ -15,7 +17,7 @@
 (defn http-response
   "Create an HTTP response for `request` containing `contents` as body"
   [request contents]
-  (let [origin ((request :headers) "origin")]   ;TODO: map in map
+  (if-let [origin (get-in request [:headers "origin"])]
     {:body contents
      :status 200
      :headers {"Content-Type" "text/plain"
@@ -24,9 +26,10 @@
 
 
 (defn myapp [request]
-  (let [params (parse-query-string (:query-string request))]
+  (let [params (parse-query-string (:query-string request))
+        {first-word "str1" second-word "str2"} params]
     (println "Got a request with following parameters: " (str params))
-    (http-response request (format "Hello World %s and %s" (params "str1") (params "str2")))))
+    (http-response request (str (f/scramble? first-word second-word)))))
 
 
 (defn -main []
