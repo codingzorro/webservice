@@ -14,9 +14,12 @@
 
 (defn myapp [request]
   (let [params (parse-query-string (:query-string request))]
-     {:body (format "Gello World %s and %s" (params "str1") (params "str2"))
-      :status 200
-      :headers {"Content-Type" "text/html"}}))
+    (println "Got this request: " request)
+    {:body (format "Gello World %s and %s" (params "str1") (params "str2"))
+     :status 200
+     :headers {"Content-Type" "text/plain"
+               "Access-Control-Allow-Origin" "http://localhost:9000"
+               "Access-Control-Allow-Credentials" "true"}}))
 
 
 (defn -main []
