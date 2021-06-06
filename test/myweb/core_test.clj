@@ -1,5 +1,6 @@
 (ns myweb.core-test
   (:require [clojure.test :refer :all]
+            [myweb.core :refer :all]
             [myweb.functions :refer :all]))
 
 (deftest flexiana-01
@@ -36,4 +37,7 @@ and at least one character"
     (is (not (scramble? "" "burrito")))))
 
 
-
+(deftest query-string
+  (testing "Parsing a typical, correct query string"
+    (is (= (parse-query-string "str1=ping&str2=pong")
+           {"str1" "ping" "str2" "pong"}))))
