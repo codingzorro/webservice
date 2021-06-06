@@ -1,6 +1,6 @@
 # myweb
 
-Code inspired by "Learning Clojure" by Adam Bard
+HTTP-related code inspired by "Learning Clojure" by Adam Bard, Infinite Skills
 
 ## Usage
 
