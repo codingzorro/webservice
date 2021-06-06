@@ -3,7 +3,7 @@
 ## Usage
 
 * open a terminal
-* run `lein run -m myweb.core`
+* run `lein run -m myweb.core` to run the server (or `lein test` to run the tests)
 * wait for requests ;-)
 
 **Note:** Get the client corresponding to this server software from its
