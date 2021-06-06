@@ -1,13 +1,15 @@
 (ns myweb.core
+  "Starts a simple Jetty server with one job: call the scramble? function"
   (:require [ring.adapter.jetty :as jetty]
             [myweb.functions :as f]))
+
 
 (import '[org.eclipse.jetty.util UrlEncoded MultiMap])
 
 
-
 (defn parse-query-string
-  ;; source: https://stackoverflow.com/questions/6591604/how-to-parse-url-parameters-in-clojure
+  "Convert the parameters encoded in the query string into a map
+  (Source: https://stackoverflow.com/questions/6591604/how-to-parse-url-parameters-in-clojure)"
   [query]
   (let [params (MultiMap.)]
       (UrlEncoded/decodeTo query params "UTF-8")
@@ -15,7 +17,8 @@
 
 
 (defn http-response
-  "Create an HTTP response for `request` containing `contents` as body"
+  "Create an HTTP response to `request` containing `contents` as body.
+  Takes care of SOP and CORS limitations."
   [request contents]
   (if-let [origin (get-in request [:headers "origin"])]
     {:body contents
@@ -25,7 +28,10 @@
                "Access-Control-Allow-Credentials" "true"}}))
 
 
-(defn myapp [request]
+(defn process
+  "Calls the `scramble?` function using the parameters included in `request`.
+  Returns the corresponding HTTP response"
+  [request]
   (let [params (parse-query-string (:query-string request))
         {first-word "str1" second-word "str2"} params]
     (println "Got a request with following parameters: " (str params))
@@ -33,4 +39,4 @@
 
 
 (defn -main []
-  (jetty/run-jetty myapp {:port 3000}))
+  (jetty/run-jetty process {:port 3000}))
