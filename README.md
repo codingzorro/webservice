@@ -1,10 +1,18 @@
 # myweb
 
-HTTP-related code inspired by "Learning Clojure" by Adam Bard, Infinite Skills
-
 ## Usage
 
-lein run -m myweb.core
+* open a terminal
+* run `lein run -m myweb.core`
+* wait for requests ;-)
+
+**Note:** Get the client corresponding to this server software from its
+[repository here at GitHub](https://github.com/codingzorro/scrambles)
+
+## Acknowledgements
+
+HTTP-related code inspired by "Learning Clojure" (Video) by Adam Bard,
+Infinite Skills
 
 ## License
 
