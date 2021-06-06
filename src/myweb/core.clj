@@ -33,9 +33,11 @@
   Returns the corresponding HTTP response"
   [request]
   (let [params (parse-query-string (:query-string request))
-        {first-word "str1" second-word "str2"} params]
+        {first-word "str1" second-word "str2"} params
+        scramble? (f/scramble? first-word second-word)]
     (println "Got a request with following parameters: " (str params))
-    (http-response request (str (f/scramble? first-word second-word)))))
+    (println "  Answer: " scramble?)
+    (http-response request (str scramble?))))
 
 
 (defn -main []
